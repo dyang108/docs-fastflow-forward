@@ -1,5 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+    <meta name="robots" content="noindex" />
+    <script>
+      (function () {
+        // Current path on docs.fastflowlm.com, e.g.:
+        //  - "/"                                  -> "https://fastflowlm.com/docs/"
+        //  - "/benchmarks/llama3_results.html"   -> "https://fastflowlm.com/docs/benchmarks/llama3_results/"
+        //  - "/instructions/cli.html"            -> "https://fastflowlm.com/docs/instructions/cli/"
+
+        var path = window.location.pathname || "/";
+        var search = window.location.search || "";
+        var hash = window.location.hash || "";
+
+        // Base docs site
+        var base = "https://fastflowlm.com/docs";
+
+        // Root path goes directly to /docs/
+        if (path === "/" || path === "") {
+          window.location.replace(base + "/" + search + hash);
+          return;
+        }
+
+        // Normalize: strip any leading slash
+        if (path.charAt(0) === "/") {
+          path = path.slice(1);
+        }
+
+        // Remove a single trailing ".html" if present
+        if (/\.html$/i.test(path)) {
+          path = path.replace(/\.html$/i, "");
+        }
+
+        // Ensure trailing slash on the docs path
+        var target = base + "/" + path.replace(/\/+$/, "") + "/" + search + hash;
+
+        // Perform the redirect
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>
+      Redirecting to
+      <a id="redirect-link" href="https://fastflowlm.com/docs/">fastflowlm.com/docs</a>
+      …
+    </p>
+    <script>
+      // Update visible link to show the computed destination (for users without JS redirect)
+      (function () {
+        var link = document.getElementById("redirect-link");
+        if (!link) return;
+
+        var path = window.location.pathname || "/";
+        var search = window.location.search || "";
+        var hash = window.location.hash || "";
+        var base = "https://fastflowlm.com/docs";
+
+        if (path === "/" || path === "") {
+          link.href = base + "/" + search + hash;
+        } else {
+          if (path.charAt(0) === "/") {
+            path = path.slice(1);
+          }
+          if (/\.html$/i.test(path)) {
+            path = path.replace(/\.html$/i, "");
+          }
+          link.href = base + "/" + path.replace(/\/+$/, "") + "/" + search + hash;
+        }
+
+        link.textContent = link.href;
+      })();
+    </script>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
