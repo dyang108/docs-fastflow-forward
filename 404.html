@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+    <meta name="robots" content="noindex" />
+    <script>
+      (function () {
+        var path = window.location.pathname || "/";
+        var search = window.location.search || "";
+        var hash = window.location.hash || "";
+        var base = "https://fastflowlm.com/docs";
+
+        if (path === "/" || path === "") {
+          window.location.replace(base + "/" + search + hash);
+          return;
+        }
+
+        if (path.charAt(0) === "/") {
+          path = path.slice(1);
+        }
+
+        if (/\.html$/i.test(path)) {
+          path = path.replace(/\.html$/i, "");
+        }
+
+        path = path.replace(/\/+$/, "");
+
+        var target = base + "/" + path + "/" + search + hash;
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>
+      Redirecting…
+      <a id="redirect-link" href="https://fastflowlm.com/docs/">fastflowlm.com/docs</a>
+    </p>
+    <script>
+      (function () {
+        var link = document.getElementById("redirect-link");
+        if (!link) return;
+
+        var path = window.location.pathname || "/";
+        var search = window.location.search || "";
+        var hash = window.location.hash || "";
+        var base = "https://fastflowlm.com/docs";
+
+        if (path === "/" || path === "") {
+          link.href = base + "/" + search + hash;
+        } else {
+          if (path.charAt(0) === "/") path = path.slice(1);
+          if (/\.html$/i.test(path)) path = path.replace(/\.html$/i, "");
+          path = path.replace(/\/+$/, "");
+          link.href = base + "/" + path + "/" + search + hash;
+        }
+
+        link.textContent = link.href;
+      })();
+    </script>
+  </body>
+</html>
+
+
